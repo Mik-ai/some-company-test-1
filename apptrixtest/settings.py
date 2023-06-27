@@ -35,6 +35,7 @@ INTERNAL_IPS = [
 # Application definition
 
 INSTALLED_APPS = [
+    "api.apps.ApiConfig",
     "debug_toolbar",
     "rest_framework",
     "django.contrib.admin",
@@ -136,3 +137,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # STATIC_ROOT
 
 STATIC_ROOT = os.path.join(BASE_DIR, "staticfiles")
+
+# MEDIA_ROOT
+
+MEDIA_ROOT = os.path.join(os.path.dirname(__file__), "images")
