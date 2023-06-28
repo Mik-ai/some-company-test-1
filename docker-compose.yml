@@ -10,6 +10,7 @@ services:
     ports:
       - "5500:5432"
   web:
+    tty: true
     build: .
     command: >
       sh -c "python manage.py collectstatic --noinput &&
