@@ -1,9 +1,10 @@
-from rest_framework import viewsets, permissions, status
+from rest_framework import viewsets, permissions, status, generics
 from rest_framework.response import Response
 
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import UserData
-from .serializers import UserSerializer, FollowUserSerializer
+from .serializers import UserSerializer, FollowUserSerializer, UserAllfieldsSerializer
 
 
 from .tasks import follow_collision_email
@@ -55,3 +56,10 @@ class FollowUser(viewsets.ViewSet):
             {"discription": f"you are now following - {u2.name}"},
             status=status.HTTP_200_OK,
         )
+
+
+class UserList(generics.ListAPIView):
+    queryset = UserData.objects.all()
+    serializer_class = UserAllfieldsSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ["gender", "name", "surname"]

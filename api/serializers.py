@@ -2,6 +2,12 @@ from rest_framework import serializers
 from api.models import UserData
 
 
+class UserAllfieldsSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserData
+        fields = "__all__"
+
+
 class UserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserData
@@ -25,10 +31,6 @@ class FollowUserSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserData
         fields = "__all__"
-        # fields = [
-        #     "id",
-        #     "follow",
-        # ]
 
     def validate(self, data):
         data["user"] = self.context["request"].user
