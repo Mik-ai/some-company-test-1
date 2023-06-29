@@ -19,3 +19,17 @@ class UserSerializer(serializers.ModelSerializer):
     def validate(self, data):
         data["user"] = self.context["request"].user
         return data
+
+
+class FollowUserSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserData
+        fields = "__all__"
+        # fields = [
+        #     "id",
+        #     "follow",
+        # ]
+
+    def validate(self, data):
+        data["user"] = self.context["request"].user
+        return data

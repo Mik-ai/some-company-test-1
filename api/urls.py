@@ -1,6 +1,10 @@
-from .views import SimpleUserViewSet
+from .views import SimpleUserViewSet, FollowUser
 from rest_framework.routers import DefaultRouter
 
 router = DefaultRouter()
 router.register(r'clients/create', SimpleUserViewSet, basename='userdata')
-urlpatterns = router.urls
+router.register(r'clients/match', FollowUser, basename='followuser')
+
+urlpatterns = []
+
+urlpatterns += router.urls

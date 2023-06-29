@@ -1,4 +1,9 @@
 services:
+  rabbitmq:
+    image: "rabbitmq:alpine"
+    ports:
+      - 5672:5672
+      - 15672:15672
   db:
     image: postgres
     volumes:
@@ -10,6 +15,7 @@ services:
     ports:
       - "5500:5432"
   web:
+    restart: always
     tty: true
     build: .
     command: >
@@ -26,3 +32,14 @@ services:
       - POSTGRES_PASSWORD=postgres
     depends_on:
       - db
+      - rabbitmq
+  celery:
+    restart: always
+    build:
+      context: .
+    command: >
+     sh -c "celery -A apptrixtest worker -l INFO --pool=solo"
+    depends_on:
+      - db
+      - rabbitmq
+      - web
