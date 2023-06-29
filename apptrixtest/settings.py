@@ -35,7 +35,7 @@ INTERNAL_IPS = [
 # Application definition
 
 INSTALLED_APPS = [
-    'django_filters',
+    "django_filters",
     "api.apps.ApiConfig",
     "debug_toolbar",
     "rest_framework",
@@ -162,5 +162,5 @@ EMAIL_USE_SSL = False
 # REST FRAMEWORK
 
 REST_FRAMEWORK = {
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    "DEFAULT_FILTER_BACKENDS": ["django_filters.rest_framework.DjangoFilterBackend"]
 }

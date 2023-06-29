@@ -3,6 +3,7 @@ from django.conf import settings
 
 from PIL import Image
 import os
+from geopy import distance
 
 WATERMARK_PATH = os.path.join(os.path.dirname(__file__), "src", "watermark.png")
 
@@ -23,6 +24,14 @@ class UserData(models.Model):
     gender = models.CharField(max_length=20, choices=GenderChoices.choices)
     avatar_img = models.ImageField(null=False)
     email = models.EmailField(max_length=254)
+
+    latitude = models.DecimalField(max_digits=20, decimal_places=10, null=True)
+    longitude = models.DecimalField(max_digits=20, decimal_places=10, null=True)
+
+    def distance_to(self, user):
+        coords_1 = self.latitude, self.longitude
+        coords_2 = user.latitude, user.longitude
+        return distance.geodesic(coords_1, coords_2).km
 
     # adding watermark
     def save(self, *args, **kwargs):

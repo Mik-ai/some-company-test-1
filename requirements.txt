@@ -11,6 +11,8 @@ Django==4.2.2
 django-debug-toolbar==4.1.0
 django-filter==23.2
 djangorestframework==3.14.0
+geographiclib==2.0
+geopy==2.3.0
 kombu==5.3.1
 Markdown==3.4.3
 Pillow==9.5.0

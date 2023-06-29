@@ -1,8 +1,9 @@
 from rest_framework import viewsets, permissions, status, generics
 from rest_framework.response import Response
 
-from django_filters.rest_framework import DjangoFilterBackend
+from django_filters.rest_framework import DjangoFilterBackend, NumberFilter
 
+from .filters import UserDataFilterSet
 from .models import UserData
 from .serializers import UserSerializer, FollowUserSerializer, UserAllfieldsSerializer
 
@@ -62,4 +63,13 @@ class UserList(generics.ListAPIView):
     queryset = UserData.objects.all()
     serializer_class = UserAllfieldsSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ["gender", "name", "surname"]
+    filterset_class = UserDataFilterSet
+    exclude = ["id"]
+
+    # distance = NumberFilter(method="distance_filter")
+    # def distance_filter(self, distance):
+    #     user = self.context["request"].user
+    #     user = UserData.objects.get(user=user)
+    #     queryset = UserData.objects.all()
+    #     queryset = [x for x in queryset if user.distance_to(x) < distance]
+    #     return queryset
