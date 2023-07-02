@@ -38,7 +38,11 @@ services:
     build:
       context: .
     command: >
-     sh -c "celery -A apptrixtest worker -l INFO --pool=solo"
+     sh -c "celery -A djangoappcore worker -l INFO --pool=solo"
+    environment:
+      - POSTGRES_NAME=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
     depends_on:
       - db
       - rabbitmq

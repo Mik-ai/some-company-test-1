@@ -47,7 +47,7 @@ class FollowUser(viewsets.ViewSet):
 
         # взаимно?
         if UserData.objects.filter(follow__in=[instance.id], pk=follow).exists():
-            follow_collision_email(instance.id, u2.id)
+            follow_collision_email.delay(instance.id, u2.id)
 
         return Response(
             {"discription": f"you are now following - {u2.name}"},
@@ -64,5 +64,5 @@ class UserList(generics.ListAPIView):
 
     def passing_context(self):
         return {
-            'active_user': UserData.objects.get(user=self.request.user),
+            "active_user": UserData.objects.get(user=self.request.user),
         }
